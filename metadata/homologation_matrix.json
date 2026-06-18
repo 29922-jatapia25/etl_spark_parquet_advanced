@@ -1,0 +1,51 @@
+[
+    {
+        "concepto_canonico": "pickup_datetime",
+        "yellow": "tpep_pickup_datetime",
+        "green": "lpep_pickup_datetime",
+        "fhvhv": "pickup_datetime",
+        "justificacion": "Representa la fecha y hora de recogida del viaje."
+    },
+    {
+        "concepto_canonico": "dropoff_datetime",
+        "yellow": "tpep_dropoff_datetime",
+        "green": "lpep_dropoff_datetime",
+        "fhvhv": "dropoff_datetime",
+        "justificacion": "Representa la fecha y hora de finalización del viaje."
+    },
+    {
+        "concepto_canonico": "pickup_location_id",
+        "yellow": "PULocationID",
+        "green": "PULocationID",
+        "fhvhv": "PULocationID",
+        "justificacion": "Representa la zona de origen del viaje."
+    },
+    {
+        "concepto_canonico": "dropoff_location_id",
+        "yellow": "DOLocationID",
+        "green": "DOLocationID",
+        "fhvhv": "DOLocationID",
+        "justificacion": "Representa la zona de destino del viaje."
+    },
+    {
+        "concepto_canonico": "trip_distance",
+        "yellow": "trip_distance",
+        "green": "trip_distance",
+        "fhvhv": "trip_miles",
+        "justificacion": "Representa la distancia recorrida en millas."
+    },
+    {
+        "concepto_canonico": "total_amount",
+        "yellow": "total_amount",
+        "green": "total_amount",
+        "fhvhv": "base_passenger_fare + tolls + sales_tax",
+        "justificacion": "En FHVHV el total se reconstruye sumando tarifa base, peajes e impuesto."
+    },
+    {
+        "concepto_canonico": "service_type",
+        "yellow": "yellow",
+        "green": "green",
+        "fhvhv": "fhvhv",
+        "justificacion": "Permite identificar el origen del servicio."
+    }
+]

@@ -1,0 +1,11 @@
+{
+    "pickup_datetime": "timestamp",
+    "dropoff_datetime": "timestamp",
+    "PULocationID": "numeric",
+    "DOLocationID": "numeric",
+    "trip_miles": "numeric",
+    "base_passenger_fare": "numeric",
+    "tolls": "numeric",
+    "sales_tax": "numeric",
+    "tips": "numeric"
+}

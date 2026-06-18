@@ -1,0 +1,110 @@
+{
+    "project": "etl_spark_parquet_advanced",
+    "description": "Business and technical quality rules applied to the NYC TLC Parquet Lakehouse pipeline.",
+    "critical_fields": [
+        "trip_id",
+        "service_type",
+        "pickup_datetime",
+        "dropoff_datetime",
+        "trip_distance",
+        "pickup_location_id",
+        "dropoff_location_id",
+        "total_amount",
+        "source_file"
+    ],
+    "transformation_rules": [
+        {
+            "rule_id": "DERIVE_TRIP_DURATION",
+            "description": "trip_duration_minutes is calculated from dropoff_datetime minus pickup_datetime in minutes."
+        },
+        {
+            "rule_id": "DERIVE_AVERAGE_SPEED",
+            "description": "average_speed_mph is calculated as trip_distance divided by duration in hours when duration is positive."
+        },
+        {
+            "rule_id": "DERIVE_FARE_PER_MILE",
+            "description": "fare_per_mile is calculated as fare_amount divided by trip_distance when distance is positive."
+        },
+        {
+            "rule_id": "DERIVE_TIP_PERCENTAGE",
+            "description": "tip_percentage is calculated as tip_amount divided by fare_amount times 100 when fare_amount is positive."
+        },
+        {
+            "rule_id": "AIRPORT_TRIP",
+            "description": "A trip is marked as airport-related when pickup or dropoff location is 132 or 138, or airport_fee is greater than zero."
+        }
+    ],
+    "rejection_rules": [
+        {
+            "rule_id": "NULL_CRITICAL_FIELDS",
+            "stage": "FASE_05_VALIDACION_CALIDAD",
+            "columns": "critical_columns",
+            "business_reason": "Critical identifiers, dates, locations, amount or source file are required for reliable analysis."
+        },
+        {
+            "rule_id": "INVALID_DATE_RANGE",
+            "stage": "FASE_05_VALIDACION_CALIDAD",
+            "columns": "pickup_datetime/dropoff_datetime",
+            "business_reason": "Invalid dates distort duration, demand and temporal analysis."
+        },
+        {
+            "rule_id": "INVALID_AMOUNT_RANGE",
+            "stage": "FASE_05_VALIDACION_CALIDAD",
+            "columns": "total_amount/fare_amount/tip_amount",
+            "business_reason": "Invalid monetary values affect revenue and tip analysis."
+        },
+        {
+            "rule_id": "INVALID_DISTANCE_RANGE",
+            "stage": "FASE_05_VALIDACION_CALIDAD",
+            "columns": "trip_distance",
+            "business_reason": "Invalid distance affects speed, fare per mile and mobility analysis."
+        },
+        {
+            "rule_id": "INVALID_DURATION_RANGE",
+            "stage": "FASE_05_VALIDACION_CALIDAD",
+            "columns": "trip_duration_minutes",
+            "business_reason": "Invalid duration distorts operational efficiency metrics."
+        },
+        {
+            "rule_id": "TECHNICAL_DUPLICATE_RECORD",
+            "stage": "FASE_05_VALIDACION_CALIDAD",
+            "columns": "trip_id/technical_key",
+            "business_reason": "Duplicate records inflate trips, revenue and operational metrics."
+        },
+        {
+            "rule_id": "INVALID_PARTITION_VALUES",
+            "stage": "FASE_05_VALIDACION_CALIDAD",
+            "columns": "year/month",
+            "business_reason": "Invalid partitions prevent reliable period-based organization."
+        },
+        {
+            "rule_id": "PARTITION_DATE_MISMATCH",
+            "stage": "FASE_05_VALIDACION_CALIDAD",
+            "columns": "year/month/pickup_datetime",
+            "business_reason": "Partition mismatch affects period queries and monthly reports."
+        },
+        {
+            "rule_id": "SUSPICIOUS_TRIP_RULES",
+            "stage": "FASE_05_VALIDACION_CALIDAD",
+            "columns": "is_suspicious_trip",
+            "business_reason": "Suspicious trips require review before business analysis."
+        },
+        {
+            "rule_id": "STATISTICAL_OUTLIER_P99",
+            "stage": "FASE_05_VALIDACION_CALIDAD",
+            "columns": "trip_distance/total_amount/trip_duration_minutes",
+            "business_reason": "Outliers can distort averages, revenue and operational analysis."
+        }
+    ],
+    "suspicious_trip_conditions": [
+        "trip_distance <= 0",
+        "total_amount <= 0",
+        "fare_amount < 0",
+        "trip_duration_minutes <= 0",
+        "trip_duration_minutes > 480",
+        "average_speed_mph > 100",
+        "tip_percentage > 100",
+        "pickup_datetime > dropoff_datetime",
+        "pickup_datetime > current_timestamp"
+    ]
+}

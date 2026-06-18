@@ -1,0 +1,18 @@
+{
+    "VendorID": "numeric",
+    "tpep_pickup_datetime": "timestamp",
+    "tpep_dropoff_datetime": "timestamp",
+    "passenger_count": "numeric",
+    "trip_distance": "numeric",
+    "PULocationID": "numeric",
+    "DOLocationID": "numeric",
+    "payment_type": "numeric",
+    "fare_amount": "numeric",
+    "extra": "numeric",
+    "mta_tax": "numeric",
+    "tip_amount": "numeric",
+    "tolls_amount": "numeric",
+    "total_amount": "numeric",
+    "congestion_surcharge": "numeric",
+    "airport_fee": "numeric"
+}

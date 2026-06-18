@@ -1,0 +1,6 @@
+pyspark
+pandas
+pyarrow
+notebook
+PyYAML
+matplotlib

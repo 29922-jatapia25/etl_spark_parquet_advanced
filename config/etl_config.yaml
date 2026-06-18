@@ -1,0 +1,15 @@
+project_name: etl_spark_parquet_advanced
+source_system_nyc: NYC_TLC
+source_system_bad: APACHE_PARQUET_TESTING
+raw_path: c:\Users\Usuario\Downloads\etl_spark_parquet_advanced\etl_spark_parquet_advanced\data\raw
+audit_path: c:\Users\Usuario\Downloads\etl_spark_parquet_advanced\etl_spark_parquet_advanced\data\audit
+quarantine_path: c:\Users\Usuario\Downloads\etl_spark_parquet_advanced\etl_spark_parquet_advanced\data\quarantine
+bronze_path: c:\Users\Usuario\Downloads\etl_spark_parquet_advanced\etl_spark_parquet_advanced\data\bronze
+silver_path: c:\Users\Usuario\Downloads\etl_spark_parquet_advanced\etl_spark_parquet_advanced\data\silver
+gold_path: c:\Users\Usuario\Downloads\etl_spark_parquet_advanced\etl_spark_parquet_advanced\data\gold
+metadata_path: c:\Users\Usuario\Downloads\etl_spark_parquet_advanced\etl_spark_parquet_advanced\metadata
+database_path: c:\Users\Usuario\Downloads\etl_spark_parquet_advanced\etl_spark_parquet_advanced\data\database\etl_taxi_gold.db
+read_mode: individual_files
+database_engine: sqlite
+process_all_files: true
+spark_shuffle_partitions: 8
